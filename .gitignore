@@ -1,0 +1,32 @@
+
+---
+
+`.gitignore`
+```gitignore
+# Node
+node_modules/
+npm-debug.log*
+pnpm-lock.yaml
+yarn.lock
+dist/
+coverage/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.envrc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project
+apps/api/serviceAccount.json
+data/index/*
+!data/index/.gitkeep
+data/docs/*
+!data/docs/.gitkeep
+
+# Docker
+*.local.yml
