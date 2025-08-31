@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import { initWs } from "../src/ws.js";
 import auth from "../src/routes/auth.js";
 import chatRoute from "../src/routes/chat.js";
+import health from "../src/routes/health.js";
 
 jest.mock("../src/services/firestore.js", () => ({
   saveChatTurn: jest.fn(),
@@ -20,7 +21,7 @@ jest.mock("../src/services/inference.js", () => ({
 function makeApp(){
   const app = express();
   app.use(express.json());
-  app.get("/health", (_req,res)=>res.json({ok:true}));
+  app.use("/health", health);
   const server = http.createServer(app);
   const io = initWs(server);
   app.use("/auth", auth);
