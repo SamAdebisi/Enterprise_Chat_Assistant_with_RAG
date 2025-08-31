@@ -1,0 +1,1 @@
+{ "expo": { "name": "EnterpriseChat", "slug": "enterprise-chat", "scheme": "enterprisechat", "android": { "package": "com.example.enterprisechat" } } }

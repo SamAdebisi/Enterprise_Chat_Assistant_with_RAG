@@ -1,0 +1,13 @@
+body { margin:0; font-family: system-ui, Arial; }
+.center { max-width: 360px; margin: 10vh auto; display: grid; gap: 8px; }
+.center input { padding: 8px; }
+.center button { padding: 8px; }
+.chat { display: grid; grid-template-rows: auto 1fr auto; height: 100vh; }
+.topbar { display:flex; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #ddd; }
+.history { padding: 12px; overflow-y: auto; display: grid; gap: 10px; }
+.msg.user { justify-self: end; background: #eef; padding: 8px 10px; border-radius: 10px; }
+.msg.assistant { justify-self: start; background: #efe; padding: 8px 10px; border-radius: 10px; }
+.inputbar { display:flex; gap:8px; padding: 8px; border-top: 1px solid #ddd; }
+.inputbar input { flex:1; padding: 8px; }
+.typing { opacity: .7; font-style: italic; }
+.sources { margin-top: 6px; font-size: 12px; opacity: .8; }
