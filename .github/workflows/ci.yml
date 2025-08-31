@@ -1,0 +1,24 @@
+name: ci
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Web build
+        working-directory: apps/web
+        run: npm ci && npm run build
+      - name: API lint & build
+        working-directory: apps/api
+        run: npm ci && npm run build
+      - name: Inference image
+        uses: docker/build-push-action@v6
+        with:
+          context: apps/inference
+          push: false
+          tags: enterprise-chat-assistant-with-rag/inference:test

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enterprise-chat-assistant-with-rag-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: enterprise-chat-assistant-with-rag-web
+  template:
+    metadata:
+      labels:
+        app: enterprise-chat-assistant-with-rag-web
+    spec:
+      containers:
+        - name: web
+          image: YOUR_REGISTRY/enterprise-chat-assistant-with-rag-web:latest
+          ports:
+            - containerPort: 5173

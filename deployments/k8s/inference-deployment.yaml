@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enterprise-chat-assistant-with-rag-inference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: enterprise-chat-assistant-with-rag-inference
+  template:
+    metadata:
+      labels:
+        app: enterprise-chat-assistant-with-rag-inference
+    spec:
+      containers:
+        - name: inference
+          image: YOUR_REGISTRY/enterprise-chat-assistant-with-rag-inference:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: chat-secrets
+                  key: openai
+            - name: INDEX_DIR
+              value: /data/index
+            - name: DOCS_DIR
+              value: /data/docs
+          volumeMounts:
+            - name: index
+              mountPath: /data/index
+            - name: docs
+              mountPath: /data/docs
+      volumes:
+        - name: index
+          persistentVolumeClaim:
+            claimName: index-pvc
+        - name: docs
+          persistentVolumeClaim:
+            claimName: docs-pvc

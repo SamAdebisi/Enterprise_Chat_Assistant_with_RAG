@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enterprise-chat-assistant-with-rag-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: enterprise-chat-assistant-with-rag-api
+  template:
+    metadata:
+      labels:
+        app: enterprise-chat-assistant-with-rag-api
+    spec:
+      containers:
+        - name: api
+          image: YOUR_REGISTRY/enterprise-chat-assistant-with-rag-api:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: INFERENCE_BASE_URL
+              value: "http://enterprise-chat-assistant-with-rag-inference:8000"
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: chat-secrets
+                  key: jwt
+            - name: CORS_ORIGIN
+              value: "https://your-web-origin"
+          volumeMounts:
+            - name: fb-cred
+              mountPath: /app/serviceAccount.json
+              subPath: serviceAccount.json
+      volumes:
+        - name: fb-cred
+          secret:
+            secretName: firebase-service-account
+
