@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: enterprise-chat-assistant-with-rag-web
+  namespace: enterprise-chat-assistant-with-rag
 spec:
   replicas: 1
   selector:

@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: enterprise-chat-assistant-with-rag-inference
+  namespace: enterprise-chat-assistant-with-rag 
 spec:
   selector:
     app: enterprise-chat-assistant-with-rag-inference

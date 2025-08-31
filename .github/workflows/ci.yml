@@ -1,24 +1,37 @@
 name: ci
 on:
-  push:
-    branches: [ main ]
+  push: { branches: [ main ] }
   pull_request:
+
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
+
       - name: Web build
         working-directory: apps/web
         run: npm ci && npm run build
-      - name: API lint & build
+
+      - name: API build
         working-directory: apps/api
         run: npm ci && npm run build
-      - name: Inference image
-        uses: docker/build-push-action@v6
-        with:
-          context: apps/inference
-          push: false
-          tags: enterprise-chat-assistant-with-rag/inference:test
+
+      - name: API tests
+        working-directory: apps/api
+        run: npm test
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+
+      - name: Inference tests
+        env:
+          PYTHONPATH: apps/inference/app
+        run: |
+          python -m pip install -r apps/inference/app/requirements.txt
+          python -m pip install pytest
+          pytest -q tests/inference

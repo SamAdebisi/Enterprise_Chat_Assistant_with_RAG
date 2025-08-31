@@ -1,0 +1,20 @@
+name: deploy
+on:
+  workflow_dispatch:
+
+jobs:
+  cloudrun:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Auth gcloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Deploy
+        env:
+          PROJECT: ${{ secrets.GCP_PROJECT }}
+          REGION: europe-north1
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: ./deployments/cloudrun/deploy.sh
