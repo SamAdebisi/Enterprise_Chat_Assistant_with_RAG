@@ -1,1 +1,1 @@
-# Makes "app" a package for pytest and uvicorn imports.
+# Makes "app" a package (marker) for pytest and uvicorn imports.
