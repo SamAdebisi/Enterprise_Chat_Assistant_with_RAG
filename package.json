@@ -1,0 +1,14 @@
+{
+    "name": "enterprise-chat-assistant-with-rag",
+    "private": true,
+    "workspaces": [
+      "apps/*",
+      "workers/*"
+    ],
+    "scripts": {
+      "build:web": "npm --prefix apps/web run build",
+      "build:api": "npm --prefix apps/api run build",
+      "test:api": "npm --prefix apps/api test"
+    }
+  }
+  
