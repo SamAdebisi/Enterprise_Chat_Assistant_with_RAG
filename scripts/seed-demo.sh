@@ -9,4 +9,7 @@ curl -fsSL -X POST "${BASE_URL}/auth/seed" -H "Content-Type: application/json" |
   exit 1
 }
 echo
-echo "Demo users created. Credentials default to alice/bob @company.com with password 'pass1234'."
+echo "Demo users created."
+echo "- alice@company.com / pass1234  (sales)"
+echo "- bob@company.com / pass1234    (engineering)"
+echo "- admin@company.com / superadmin123  (admin, all)"

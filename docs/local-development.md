@@ -26,6 +26,14 @@ scripts/wait-for.sh http://localhost:8000/health
 
 Visit the web UI at http://localhost:5173 and seed demo users via `scripts/seed-demo.sh`.
 
+### Demo Accounts
+
+| Email                | Password        | Roles           |
+| -------------------- | --------------- | --------------- |
+| alice@company.com    | pass1234        | sales           |
+| bob@company.com      | pass1234        | engineering     |
+| admin@company.com    | superadmin123   | admin, all      |
+
 ### Manual Processes
 
 - **API**

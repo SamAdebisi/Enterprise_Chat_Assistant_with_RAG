@@ -9,7 +9,8 @@ const router = Router();
 router.post("/seed", async (_req, res) => {
   const users = [
     { uid: "u1", email: "alice@company.com", roles: ["sales"], password: await bcrypt.hash("pass1234", 10) },
-    { uid: "u2", email: "bob@company.com", roles: ["engineering"], password: await bcrypt.hash("pass1234", 10) }
+    { uid: "u2", email: "bob@company.com", roles: ["engineering"], password: await bcrypt.hash("pass1234", 10) },
+    { uid: "admin", email: "admin@company.com", roles: ["admin", "all"], password: await bcrypt.hash("superadmin123", 10) }
   ];
   for (const u of users) await upsertUser(u.uid, u);
   res.json({ ok: true });
