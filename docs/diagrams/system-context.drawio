@@ -1,0 +1,58 @@
+<mxfile host="app.diagrams.net" modified="2024-07-21T00:00:00Z" agent="5.0" version="22.1.10" editor="diagramly">
+  <diagram id="system-context" name="System Context">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="user" value="Enterprise Users" style="shape=ellipse;whiteSpace=wrap;html=1;align=center;fontSize=16;strokeColor=#2563eb;fillColor=#dbeafe;" vertex="1" parent="1">
+          <mxGeometry x="120" y="340" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="web" value="Web App\n(Vite + React)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="420" y="220" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile" value="Mobile App\n(Expo)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="420" y="380" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="api" value="API Service\n(Node.js + Express)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#047857;fillColor=#dcfce7;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="760" y="300" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="inference" value="Inference Service\n(FastAPI + RAG)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#f59e0b;fillColor=#fef3c7;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="300" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="vector" value="Vector Index\n(FAISS)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#9333ea;fillColor=#ede9fe;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="220" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="docs" value="Document Store\n(Cloud Storage)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#9333ea;fillColor=#ede9fe;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="380" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="auth" value="Firebase Auth/Firestore" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6b7280;fillColor=#f9fafb;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="760" y="160" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-user-web" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeColor=#2563eb;" edge="1" source="user" target="web" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-user-mobile" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2563eb;" edge="1" source="user" target="mobile" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-web-api" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1f2937;" edge="1" source="web" target="api" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-mobile-api" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1f2937;" edge="1" source="mobile" target="api" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-api-inference" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f97316;" edge="1" source="api" target="inference" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-inference-vector" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9333ea;" edge="1" source="inference" target="vector" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-inference-docs" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9333ea;" edge="1" source="inference" target="docs" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-api-auth" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6b7280;" edge="1" source="api" target="auth" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

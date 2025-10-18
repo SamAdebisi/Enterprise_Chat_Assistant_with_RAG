@@ -1,18 +1,56 @@
 import os
+import logging
 from openai import OpenAI
+from typing import Optional
+
+logger = logging.getLogger(__name__)
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY environment variable is required")
+
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 SYSTEM = (
-  "Answer using only provided context. If unsure, say you don't know. "
-  "Always cite sources as [title]."
+    "You are a helpful assistant that answers questions based on the provided context. "
+    "Always cite your sources using [title] format. "
+    "If the context doesn't contain enough information to answer the question, "
+    "say 'I don't have enough information to answer this question based on the provided context.' "
+    "Be concise but comprehensive in your answers."
 )
 
 def generate(question: str, context: str) -> str:
-    messages = [
-        {"role": "system", "content": SYSTEM},
-        {"role": "user", "content": f"Question:\n{question}\n\nContext:\n{context}\n\nAnswer succinctly with citations."}
-    ]
-    resp = client.chat.completions.create(model="gpt-4o-mini", messages=messages, temperature=0.2)
-    return resp.choices[0].message.content or "I don't know."
+    """Generate answer using OpenAI with comprehensive error handling."""
+    try:
+        if not question or not question.strip():
+            raise ValueError("Question cannot be empty")
+        
+        if not context or not context.strip():
+            logger.warning("Empty context provided for question")
+            return "I don't have enough information to answer this question."
+        
+        messages = [
+            {"role": "system", "content": SYSTEM},
+            {"role": "user", "content": f"Question:\n{question}\n\nContext:\n{context}\n\nAnswer succinctly with citations."}
+        ]
+        
+        logger.info(f"Generating answer for question: {question[:100]}...")
+        
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini", 
+            messages=messages, 
+            temperature=0.2,
+            max_tokens=1000
+        )
+        
+        answer = resp.choices[0].message.content
+        if not answer:
+            logger.warning("Empty response from OpenAI")
+            return "I don't know."
+        
+        logger.info(f"Generated answer: {answer[:100]}...")
+        return answer
+        
+    except Exception as e:
+        logger.error(f"LLM generation failed: {e}")
+        return f"I encountered an error while generating an answer: {str(e)}"

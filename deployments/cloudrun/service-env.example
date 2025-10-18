@@ -1,0 +1,7 @@
+# Copy and source this file before running deploy.sh for Cloud Run deployments.
+export PROJECT="my-gcp-project"
+export REGION="us-central1"
+export OPENAI_API_KEY="sk-your-openai-key"
+export JWT_SECRET="change-me"
+export INFERENCE_BASE_URL="https://enterprise-chat-assistant-with-rag-inference-<hash>-uc.a.run.app"
+export CORS_ORIGIN="https://chat.mycompany.com"

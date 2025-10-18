@@ -1,10 +1,7 @@
 import request from "supertest";
-import express from "express";
-import http from "http";
 import jwt from "jsonwebtoken";
-import { initWs } from "../src/ws.js";
-import auth from "../src/routes/auth.js";
-import chatRoute from "../src/routes/chat.js";
+import { createServer } from "../src/server.js";
+import { cfg } from "../src/config.js";
 
 jest.mock("../src/services/firestore.js", () => ({
   saveChatTurn: jest.fn(),
@@ -17,34 +14,32 @@ jest.mock("../src/services/inference.js", () => ({
   ragQuery: async ()=> ({ answer: "hello [doc]", sources:[{title:"doc"}] })
 }));
 
-function makeApp(){
-  const app = express();
-  app.use(express.json());
-  app.get("/health", (_req,res)=>res.json({ok:true}));
-  const server = http.createServer(app);
-  const io = initWs(server);
-  app.use("/auth", auth);
-  app.use("/chat", chatRoute(io));
-  return { app, server };
-}
-
 describe("API", ()=>{
   it("health", async ()=>{
-    const { app } = makeApp();
+    const { app } = createServer();
     const r = await request(app).get("/health");
     expect(r.status).toBe(200);
     expect(r.body.ok).toBe(true);
   });
 
   it("ask requires auth", async ()=>{
-    const { app } = makeApp();
+    const { app } = createServer();
     const r = await request(app).post("/chat/ask").send({question:"hi"});
     expect(r.status).toBe(401);
   });
 
+  it("ask validates payload", async ()=>{
+    const { app } = createServer();
+    const token = jwt.sign({ uid:"u1", email:"alice@company.com", roles:["sales"] }, cfg.jwtSecret);
+    const r = await request(app).post("/chat/ask")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ question: "" });
+    expect(r.status).toBe(400);
+  });
+
   it("ask returns answer", async ()=>{
-    const { app } = makeApp();
-    const token = jwt.sign({ uid:"u1", email:"alice@company.com", roles:["sales"] }, "dev");
+    const { app } = createServer();
+    const token = jwt.sign({ uid:"u1", email:"alice@company.com", roles:["sales"] }, cfg.jwtSecret);
     const r = await request(app).post("/chat/ask")
       .set("Authorization", `Bearer ${token}`)
       .send({question:"hi"});
