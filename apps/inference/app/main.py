@@ -1,5 +1,9 @@
 import os, io, logging
+from dotenv import load_dotenv
 from fastapi import FastAPI, UploadFile, Form, HTTPException
+
+# Load environment variables
+load_dotenv()
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from .schemas import QueryRequest, QueryResponse

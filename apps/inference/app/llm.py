@@ -1,7 +1,11 @@
 import os
 import logging
+from dotenv import load_dotenv
 from openai import OpenAI
 from typing import Optional
+
+# Load environment variables
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -9,7 +13,14 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY environment variable is required")
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+# Initialize client lazily to avoid import-time issues
+client = None
+
+def get_client():
+    global client
+    if client is None:
+        client = OpenAI(api_key=OPENAI_API_KEY)
+    return client
 
 SYSTEM = (
     "You are a helpful assistant that answers questions based on the provided context. "
@@ -36,7 +47,7 @@ def generate(question: str, context: str) -> str:
         
         logger.info(f"Generating answer for question: {question[:100]}...")
         
-        resp = client.chat.completions.create(
+        resp = get_client().chat.completions.create(
             model="gpt-4o-mini", 
             messages=messages, 
             temperature=0.2,

@@ -2,7 +2,7 @@ import os
 from typing import List, Dict, Any, Tuple
 from rank_bm25 import BM25Okapi
 from .store import VectorStore
-from .rag import embed_texts  # reuse embeddings
+from .embeddings import embed_texts
 
 RRF_K = int(os.getenv("RRF_K", "60"))
 
