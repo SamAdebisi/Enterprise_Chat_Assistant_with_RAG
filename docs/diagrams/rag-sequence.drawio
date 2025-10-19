@@ -1,5 +1,5 @@
-<mxfile host="app.diagrams.net" modified="2024-07-21T00:00:00Z" agent="5.0" version="22.1.10" editor="diagramly">
-  <diagram id="rag-sequence" name="RAG Sequence">
+<mxfile host="app.diagrams.net" modified="2024-12-19T00:00:00Z" agent="5.0" version="22.1.10" editor="diagramly">
+  <diagram id="rag-sequence" name="RAG Query Processing Flow">
     <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
       <root>
         <mxCell id="0" />
@@ -19,31 +19,31 @@
         <mxCell id="lane-store" value="Vector Store" style="shape=swimlane;swimlaneLine=0;whiteSpace=wrap;html=1;horizontal=0;startSize=40;fontSize=15;" vertex="1" parent="1">
           <mxGeometry x="960" y="80" width="220" height="640" as="geometry" />
         </mxCell>
-        <mxCell id="start" value="Ask question" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2563eb;fillColor=#dbeafe;fontSize=13;" vertex="1" parent="lane-user">
+        <mxCell id="start" value="1. Ask question&#xa;User input" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2563eb;fillColor=#dbeafe;fontSize=12;align=center;" vertex="1" parent="lane-user">
           <mxGeometry x="20" y="80" width="120" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="req-web" value="POST /chat/ask" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=13;" vertex="1" parent="lane-web">
+        <mxCell id="req-web" value="2. POST /chat/ask&#xa;HTTP Request" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=11;align=center;" vertex="1" parent="lane-web">
           <mxGeometry x="20" y="140" width="140" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="req-api" value="Validate roles, emit typing" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#047857;fillColor=#dcfce7;fontSize=12;" vertex="1" parent="lane-api">
+        <mxCell id="req-api" value="3. Validate roles&#xa;Emit typing indicator" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#047857;fillColor=#dcfce7;fontSize=11;align=center;" vertex="1" parent="lane-api">
           <mxGeometry x="20" y="220" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="req-inference" value="Hybrid retrieval" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#f59e0b;fillColor=#fef3c7;fontSize=12;" vertex="1" parent="lane-inference">
+        <mxCell id="req-inference" value="4. Hybrid retrieval&#xa;Semantic + Keyword" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#f59e0b;fillColor=#fef3c7;fontSize=11;align=center;" vertex="1" parent="lane-inference">
           <mxGeometry x="30" y="300" width="160" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="req-store" value="FAISS + BM25" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#9333ea;fillColor=#ede9fe;fontSize=12;" vertex="1" parent="lane-store">
+        <mxCell id="req-store" value="5. Vector search&#xa;FAISS + BM25" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#9333ea;fillColor=#ede9fe;fontSize=11;align=center;" vertex="1" parent="lane-store">
           <mxGeometry x="40" y="380" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="req-llm" value="Generate answer" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#f59e0b;fillColor=#fef3c7;fontSize=12;" vertex="1" parent="lane-inference">
+        <mxCell id="req-llm" value="6. Generate answer&#xa;LLM + Context" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#f59e0b;fillColor=#fef3c7;fontSize=11;align=center;" vertex="1" parent="lane-inference">
           <mxGeometry x="30" y="460" width="160" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="resp-api" value="Persist turn" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#047857;fillColor=#dcfce7;fontSize=12;" vertex="1" parent="lane-api">
+        <mxCell id="resp-api" value="7. Persist turn&#xa;Save to Firestore" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#047857;fillColor=#dcfce7;fontSize=11;align=center;" vertex="1" parent="lane-api">
           <mxGeometry x="20" y="540" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="resp-web" value="Show answer + citations" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=12;" vertex="1" parent="lane-web">
+        <mxCell id="resp-web" value="8. Show answer&#xa;+ Citations" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=11;align=center;" vertex="1" parent="lane-web">
           <mxGeometry x="20" y="620" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="resp-user" value="Answer delivered" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2563eb;fillColor=#dbeafe;fontSize=13;" vertex="1" parent="lane-user">
+        <mxCell id="resp-user" value="9. Answer delivered&#xa;Complete" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2563eb;fillColor=#dbeafe;fontSize=12;align=center;" vertex="1" parent="lane-user">
           <mxGeometry x="20" y="680" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="flow1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2563eb;" edge="1" source="start" target="req-web" parent="1">

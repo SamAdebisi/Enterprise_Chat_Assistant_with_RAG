@@ -1,10 +1,10 @@
-<mxfile host="app.diagrams.net" modified="2024-07-21T00:00:00Z" agent="5.0" version="22.1.10" editor="diagramly">
-  <diagram id="deployments" name="Cloud Run & K8s">
+<mxfile host="app.diagrams.net" modified="2024-12-19T00:00:00Z" agent="5.0" version="22.1.10" editor="diagramly">
+  <diagram id="deployments" name="Cloud Run & K8s Deployment Architecture">
     <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="cloud" value="Google Cloud" style="swimlane;whiteSpace=wrap;html=1;startSize=40;fontSize=18;strokeColor=#0f172a;fillColor=#e2e8f0;" vertex="1" parent="1">
+        <mxCell id="cloud" value="Google Cloud Platform" style="swimlane;whiteSpace=wrap;html=1;startSize=40;fontSize=18;strokeColor=#0f172a;fillColor=#e2e8f0;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="80" y="60" width="1320" height="700" as="geometry" />
         </mxCell>
         <mxCell id="cloudrun" value="Cloud Run" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fontSize=16;strokeColor=#2563eb;fillColor=#dbeafe;" vertex="1" parent="cloud">
@@ -13,34 +13,34 @@
         <mxCell id="gke" value="GKE (optional)" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fontSize=16;strokeColor=#047857;fillColor=#dcfce7;" vertex="1" parent="cloud">
           <mxGeometry x="660" y="80" width="600" height="560" as="geometry" />
         </mxCell>
-        <mxCell id="cloudrun-api" value="API Service" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=14;" vertex="1" parent="cloudrun">
+        <mxCell id="cloudrun-api" value="API Service&#xa;Node.js + Express&#xa;Port: 3000" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=12;align=center;" vertex="1" parent="cloudrun">
           <mxGeometry x="60" y="120" width="220" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="cloudrun-inference" value="Inference Service" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=14;" vertex="1" parent="cloudrun">
+        <mxCell id="cloudrun-inference" value="Inference Service&#xa;FastAPI + Python&#xa;Port: 8000" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=12;align=center;" vertex="1" parent="cloudrun">
           <mxGeometry x="60" y="300" width="220" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="cloudrun-web" value="Web Frontend" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=14;" vertex="1" parent="cloudrun">
+        <mxCell id="cloudrun-web" value="Web Frontend&#xa;Vite + React&#xa;Port: 5173" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#f8fafc;fontSize=12;align=center;" vertex="1" parent="cloudrun">
           <mxGeometry x="340" y="210" width="220" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="gke-api" value="API Deployment" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#ffffff;fontSize=14;" vertex="1" parent="gke">
+        <mxCell id="gke-api" value="API Deployment&#xa;Kubernetes Pod&#xa;Auto-scaling" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#ffffff;fontSize=12;align=center;" vertex="1" parent="gke">
           <mxGeometry x="60" y="120" width="220" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="gke-inference" value="Inference Deployment" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#ffffff;fontSize=14;" vertex="1" parent="gke">
+        <mxCell id="gke-inference" value="Inference Deployment&#xa;Kubernetes Pod&#xa;GPU Support" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#ffffff;fontSize=12;align=center;" vertex="1" parent="gke">
           <mxGeometry x="60" y="300" width="220" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="gke-index" value="StatefulSet: Vector Index" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#ffffff;fontSize=14;" vertex="1" parent="gke">
+        <mxCell id="gke-index" value="Vector Index&#xa;StatefulSet&#xa;Persistent Storage" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1f2937;fillColor=#ffffff;fontSize=12;align=center;" vertex="1" parent="gke">
           <mxGeometry x="360" y="210" width="220" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="storage" value="GCS Bucket: Documents" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#9333ea;fillColor=#ede9fe;fontSize=14;" vertex="1" parent="cloud">
+        <mxCell id="storage" value="GCS Bucket&#xa;Document Storage&#xa;Vector Embeddings" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#9333ea;fillColor=#ede9fe;fontSize=12;align=center;" vertex="1" parent="cloud">
           <mxGeometry x="1040" y="660" width="260" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="firestore" value="Firestore" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#9333ea;fillColor=#ede9fe;fontSize=14;" vertex="1" parent="cloud">
+        <mxCell id="firestore" value="Firestore&#xa;User Data&#xa;Chat History" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#9333ea;fillColor=#ede9fe;fontSize=12;align=center;" vertex="1" parent="cloud">
           <mxGeometry x="780" y="660" width="220" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="artifact" value="Artifact Registry" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2563eb;fillColor=#dbeafe;fontSize=14;" vertex="1" parent="cloud">
+        <mxCell id="artifact" value="Artifact Registry&#xa;Container Images&#xa;Docker Hub" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#2563eb;fillColor=#dbeafe;fontSize=12;align=center;" vertex="1" parent="cloud">
           <mxGeometry x="120" y="660" width="260" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="ci" value="CI/CD" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6b7280;fillColor=#f9fafb;fontSize=14;" vertex="1" parent="cloud">
+        <mxCell id="ci" value="CI/CD Pipeline&#xa;GitHub Actions&#xa;Auto Deploy" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6b7280;fillColor=#f9fafb;fontSize=12;align=center;" vertex="1" parent="cloud">
           <mxGeometry x="420" y="660" width="260" height="100" as="geometry" />
         </mxCell>
         <mxCell id="edge-build" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6b7280;" edge="1" source="ci" target="artifact" parent="cloud">
